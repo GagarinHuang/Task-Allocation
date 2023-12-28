@@ -7,7 +7,7 @@ numpy, pulp
 ## Run
 ### Command
 python3 allocation.py [arg1] [arg2] [arg3] [arg4]<br>
-<!--
+
 *arg1* the number of unit counts.  
 e.g. for one CPU within N cores and one GPU, arg1 = N<br>
 *arg2* the filename of tasks number. e.g. tasks.txt  
@@ -20,7 +20,6 @@ cost_g2 cost_c2
 cost_gi means the time cost of i-th task assigned to gpu  
 cost_ci means the time cost of i-th task assigned to cpu (one core)<br>
 *arg4* the time limit of whole prgram
--->
 
 ### Example
 python3 allocation.py 8 tasks.txt cost.txt 10  
