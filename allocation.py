@@ -3,17 +3,18 @@ import numpy as np
 import sys
 
 args = sys.argv
-task = [int(args[1]), int(args[2]), int(args[3]), int(args[4]), int(args[5])]
-duration = int(args[6])
+unitCount = int(args[1]) # 总计算单元数
+taskFile = args[2]
+costFile = args[3]
+duration = int(args[4])
+task = []
 
 def generate_t():
-    # task 数量
-    
-    # 读取文件 time.txt
+    # 读取time cost文件
     cost = []
 
     # 打开文件并逐行读取内容
-    with open('cost.txt', 'r') as file:
+    with open(costFile, 'r') as file:
         # 逐行读取文件内容
         lines = file.readlines()
 
@@ -23,18 +24,31 @@ def generate_t():
             elements = list(map(float, elements))
             cost.append(elements)
 
-    # 生成 task * 8 矩阵
+    # 生成 task * unitCount 矩阵
     t = []
     for i in range(len(task)):
         count = task[i]
         if count > 0:
             temp = []
             temp.append(cost[i][0])
-            for j in range(7):
+            for j in range(unitCount-1):
                 temp.append(cost[i][1])
             for j in range(count):
                 t.append(temp)
     return t
+
+def generate_task():
+
+    # 打开task number文件并逐行读取内容
+    with open(taskFile, 'r') as file:
+        # 逐行读取文件内容
+        lines = file.readlines()
+
+        # 将每一行内容拆分为元素，并添加到矩阵中
+        for line in lines:
+            elements = line.strip().split()
+            for ele in elements:
+               task.append(int(ele))
 
 def GPU_First(n, unitCount):
     # Define the model
@@ -148,9 +162,9 @@ def CPU_First(n, unitCount):
         print(f"{name}: {constraint.value()}")
     '''
 
+generate_task()
 t = generate_t()
 n = len(t) # 任务数量
-unitCount = 8 # 总计算单元数
 
 print("task num:", n, "calc units:", unitCount)
 GPU_First(n, unitCount)
