@@ -1,11 +1,11 @@
 # Task-Allocation
 Task allocation for heterogenous computing CPU-GPU using integer programming
 
-##Requiring packages
+## Requiring packages
 numpy, pulp
 
-##Run
-###Command
+## Run
+### Command
 python3 allocation.py [arg1] [arg2] [arg3] [arg4]
 *arg1* the number of unit counts. e.g. for one CPU within N cores and one GPU, arg1 = N
 *arg2* the filename of tasks number. e.g. tasks.txt
@@ -19,9 +19,9 @@ cost_gi means the time cost of i-th task assigned to gpu
 cost_ci means the time cost of i-th task assigned to cpu (one core)
 *arg4* the time limit of whole prgram
 
-###Example
+### Example
 python3 allocation.py 8 tasks.txt cost.txt 10
 
-##Constraint
+## Constraint
 At present only support one single CPU within multiple cores and one single GPU.
 If want to support CPUs-GPUs, need to modify function 'generate_t' in allocation.py, which means generating time cost matrix.
